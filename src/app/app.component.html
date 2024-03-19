@@ -227,6 +227,15 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
+      <ul>
+        @for (event of events; track event.time) {
+          <li>
+            <small>{{ event.time | date:'medium' }}</small>
+            <div>{{ event.message }}:</div>
+            <blockquote>{{ event.event | json }}</blockquote>
+          </li>
+        }
+      </ul>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">

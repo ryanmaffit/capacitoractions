@@ -1,4 +1,4 @@
-name: Android CI
+name: Android CI/CD
 
 on:
   push:
@@ -36,6 +36,16 @@ jobs:
     - name: Grant execute permission for gradlew
       working-directory: android
       run: chmod +x gradlew
-    - name: Build with Gradle
+    - name: Build Release bundle with Gradle
       working-directory: android
-      run: ./gradlew build
+      run: ./gradlew app:bundleRelease
+    - name: Write keystore file
+      working-directory: android
+      env:
+        MAFFITDEV_KEYSTORE: ${{ secrets.MAFFITDEV_KEYSTORE }}
+      run: echo $MAFFITDEV_KEYSTORE | base64 --decode > MaffitDev.jks
+    - name: Sign Release app bundle with jarsigner
+      working-directory: android
+      env:
+        MAFFITDEV_PASSWORD: ${{ secrets.MAFFITDEV_PASSWORD }}
+      run: jarsigner -keystore MaffitDev.jks -keypass "$MAFFITDEV_PASSWORD" -storepass "$MAFFITDEV_PASSWORD" app/build/outputs/bundle/release/app-release.aab MaffitDev

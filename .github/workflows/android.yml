@@ -49,3 +49,8 @@ jobs:
       env:
         MAFFITDEV_PASSWORD: ${{ secrets.MAFFITDEV_PASSWORD }}
       run: jarsigner -keystore MaffitDev.jks -keypass "$MAFFITDEV_PASSWORD" -storepass "$MAFFITDEV_PASSWORD" app/build/outputs/bundle/release/app-release.aab MaffitDev
+    - name: Upload app-release.aab artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release.aab
+        path: android/app/build/outputs/bundle/release/app-release.aab

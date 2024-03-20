@@ -1,4 +1,9 @@
-apply plugin: 'com.android.application'
+import com.github.triplet.gradle.androidpublisher.ReleaseStatus
+
+plugins {
+    id 'com.android.application'
+    id 'com.github.triplet.play' version '3.9.1'
+}
 
 android {
     namespace "net.maffit.capacitoractions"
@@ -22,6 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+play {
+    serviceAccountCredentials.set(file("../maffitdev.json"))
+    defaultToAppBundles.set(true)
 }
 
 repositories {

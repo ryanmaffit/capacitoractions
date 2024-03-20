@@ -48,6 +48,11 @@ jobs:
       env:
         MAFFITDEV_KEYSTORE: ${{ secrets.MAFFITDEV_KEYSTORE }}
       run: echo $MAFFITDEV_KEYSTORE | base64 --decode > MaffitDev.jks
+    - name: Write maffitdev service account file
+      working-directory: android
+      env:
+        MAFFITDEV_SA: ${{ secrets.MAFFITDEV_SA }}
+      run: echo $MAFFITDEV_SA | base64 --decode > maffitdev.json
     - name: Sign Release app bundle with jarsigner
       working-directory: android
       env:
@@ -58,3 +63,6 @@ jobs:
       with:
         name: app-release.aab
         path: android/app/build/outputs/bundle/release/app-release.aab
+    - name: Upload bundle with Gradle
+      working-directory: android
+      run: ./gradlew uploadReleasePrivateBundle

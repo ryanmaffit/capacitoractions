@@ -1,7 +1,7 @@
 # This is a basic workflow that is manually triggered
 
 name: Manual workflow
-run-name: Deploy ${{ inputs.tag }} to ${{ inputs.environment }} by @${{ github.actor }}
+run-name: Deploy ${{ inputs.tag }} to ${{ inputs.environment }}
 
 on:
   workflow_dispatch:

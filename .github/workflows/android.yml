@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: echo "Hello wlrd"
-    if: false
+    environment: staging
 
   build:
     needs: test

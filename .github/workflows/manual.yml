@@ -16,14 +16,14 @@ on:
 jobs:
   deploy-cloud:
     runs-on: ubuntu-latest
-    if: ${{ inputs.cloud }} == true
+    if: ${{ inputs.cloud == true }}
     steps:
     - name: Deploying cloud
       run: echo "Deploying tag ${{ inputs.tag }} to cloud ${{ inputs.environment }}"
 
   deploy-mobile:
     runs-on: ubuntu-latest
-    if: ${{ inputs.mobile }} == true
+    if: ${{ inputs.mobile == true }}
     steps:
     - name: Deploying mobile
       run: echo "Deploying tag ${{ inputs.tag }} to mobile ${{ inputs.environment }}"

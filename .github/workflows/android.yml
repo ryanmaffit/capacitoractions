@@ -5,7 +5,14 @@ on:
     tags: v*
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Hello wlrd"
+    if: false
+
   build:
+    needs: test
 
     runs-on: ubuntu-latest
 
